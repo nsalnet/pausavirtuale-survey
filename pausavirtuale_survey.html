@@ -398,19 +398,6 @@
     color: var(--dark);
   }
 
-  .share-btn {
-    width: 100%;
-    background: var(--dark);
-    color: white;
-    border: none;
-    border-radius: 14px;
-    padding: 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
 
   .restart-btn {
     width: 100%;
@@ -748,7 +735,6 @@
       <p id="insight-text">Elaborazione in corso...</p>
     </div>
 
-    <button class="share-btn" onclick="copyResults()">📋 Copia risposte da condividere</button>
     <button class="restart-btn" onclick="restartSurvey()">↩ Ricomincia da capo</button>
   </div>
 
@@ -857,7 +843,7 @@
     if (reaction.indexOf('scaricherei') !== -1) {
       parts.push('La reazione entusiasta e esattamente il segnale che cercavamo.');
     } else if (reaction.indexOf('Interessante') !== -1 || reaction.indexOf('dubbi') !== -1) {
-      parts.push('La risposta con dubbi e preziosa: il concept ha potenziale ma l'esecuzione deve convincere.');
+      parts.push('La risposta con dubbi e preziosa: il concept ha potenziale ma l\'esecuzione deve convincere.');
     } else if (reaction.indexOf('strana') !== -1 || reaction.indexOf('mai') !== -1) {
       parts.push('Lo scetticismo ci aiuta: forse il posizionamento va affinato o il target e piu specifico.');
     } else if (reaction) {
@@ -877,7 +863,7 @@
     } else if (payment.indexOf('10-20') !== -1 || payment.indexOf('5-10') !== -1 || payment.indexOf('5–10') !== -1 || payment.indexOf('10–20') !== -1) {
       parts.push('Disponibilita a pagare 5+ euro/mese: pain point reale, modello subscription sostenibile.');
     } else if (payment.indexOf('una volta') !== -1) {
-      parts.push('Preferenza per pagamento singolo: valutare one-time purchase (~9.99) oltre all'abbonamento.');
+      parts.push('Preferenza per pagamento singolo: valutare one-time purchase (~9.99) oltre all\'abbonamento.');
     } else if (payment.indexOf('2') !== -1) {
       parts.push('Fascia 2-5 euro/mese: freemium con piano base accessibile.');
     }
@@ -922,24 +908,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function copyResults() {
-    var text = 'Risposte Questionario - Pausa Virtuale
-
-';
-    Object.keys(questionLabels).forEach(function(key) {
-      var display = formatAnswer(answers[key]);
-      if (!display) return;
-      text += questionLabels[key] + ':
-' + display + '
-
-';
-    });
-    navigator.clipboard.writeText(text).then(function() {
-      var btn = document.querySelector('.share-btn');
-      btn.textContent = 'Copiato!';
-      setTimeout(function(){ btn.textContent = 'Copia risposte da condividere'; }, 2000);
-    }).catch(function(){ alert(text); });
-  }
 
   function restartSurvey() {
     answers = {};
