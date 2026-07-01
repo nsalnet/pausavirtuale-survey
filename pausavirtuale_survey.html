@@ -887,6 +887,13 @@
     const q9extra = document.getElementById('q9-text');
     if (q9extra && q9extra.value.trim()) answers['q9-extra'] = q9extra.value.trim();
 
+    // Invia risposte a Formspree
+    fetch('https://formspree.io/f/mgojnnqy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(answers)
+    }).catch(() => {}); // silenzioso in caso di errore
+
     document.getElementById('survey').style.display = 'none';
     document.getElementById('results').classList.add('active');
     updateProgress(TOTAL_STEPS);
