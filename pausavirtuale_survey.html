@@ -878,15 +878,14 @@
     var q9extra = document.getElementById('q9-text');
     if (q9extra && q9extra.value.trim()) answers['q9-extra'] = q9extra.value.trim();
 
-    var payload = {};
+    var formData = new FormData();
     Object.keys(questionLabels).forEach(function(k) {
       var f = formatAnswer(answers[k]);
-      if (f) payload[questionLabels[k]] = f;
+      if (f) formData.append(questionLabels[k], f);
     });
     fetch('https://formspree.io/f/mgojnnqy', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: formData
     }).catch(function(){});
 
     document.getElementById('survey').style.display = 'none';
